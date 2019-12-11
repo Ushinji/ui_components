@@ -5,6 +5,7 @@ UI Component sample list.
 * TypeScript
 * React.js
 * styled-components
+* Storybook
 
 # Setup
 1. Build
