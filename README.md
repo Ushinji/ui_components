@@ -1,6 +1,11 @@
 # What is ?
 UI Component sample list.
 
+# Tech Stack
+* TypeScript
+* React.js
+* styled-components
+
 # Setup
 1. Build
 
