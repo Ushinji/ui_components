@@ -15,6 +15,11 @@
         "baseUrl": "./",
         "paths": {
             "@frontend/*": ["frontend/*"]
-        }
+        },
+        "plugins": [
+            {
+                "name": "typescript-styled-plugin"
+            }
+        ]
     },
 }
