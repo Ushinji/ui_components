@@ -96,16 +96,16 @@ type Props = {
   name: string;
   label: string;
   value: string;
-  checked: boolean;
   onClick: (age: string) => void;
+  checked?: boolean;
 };
 
 const RadioButton: React.FC<Props> = ({
   name,
   label,
   value,
-  checked,
   onClick,
+  checked = false,
 }) => {
   return (
     <Container htmlFor={`radio-${name}-${value}`}>
