@@ -13,5 +13,8 @@
         "noImplicitReturns": true,
         "lib": ["es2017", "dom"],
         "baseUrl": "./",
+        "paths": {
+            "@frontend/*": ["frontend/*"]
+        }
     },
 }

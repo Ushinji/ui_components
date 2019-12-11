@@ -12,6 +12,9 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    alias: {
+      '@frontend': path.resolve(__dirname, 'frontend'),
+    },
   },
   module: {
     rules: [
