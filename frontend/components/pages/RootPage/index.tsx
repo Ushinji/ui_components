@@ -1,5 +1,12 @@
 import * as React from 'react';
+import styled from 'styled-components';
 import RadioButton from '@frontend/components/molecules/RadioButton';
+
+const RadioButtonGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+`;
 
 const RootPage: React.FC = () => {
   const [age, setAge] = React.useState('male');
@@ -8,7 +15,7 @@ const RootPage: React.FC = () => {
     <div>
       <h1>Radio Button</h1>
       <div>{age}</div>
-      <div>
+      <RadioButtonGroup>
         <RadioButton
           name="sex"
           label="男性"
@@ -23,7 +30,7 @@ const RootPage: React.FC = () => {
           onClick={setAge}
           checked={age === 'female'}
         />
-      </div>
+      </RadioButtonGroup>
     </div>
   );
 };
