@@ -16,80 +16,72 @@ const Input = styled.input`
   appearance: none;
   position: absolute;
 
-  & + span {
-    vertical-align: middle;
-    display: inline-block;
-    border: 1px solid ${colors.gray};
-    box-sizing: border-box;
-    background-color: ${colors.white};
-    top: 0px;
-    left: 0px;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
+  + label {
+    display: block;
+    position: relative;
+    line-height: 28px;
+    cursor: pointer;
+    padding-left: 32px;
+    margin-left: 8px;
+    font-weight: normal;
+
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 24px;
+      height: 24px;
+      border: 1px solid ${colors.gray};
+      border-radius: 50%;
+    }
   }
 
-  &:checked + span {
-    position: relative;
-    background-color: ${colors.blue};
-    border: 2px solid ${colors.blue};
-
-    &:after {
+  &:checked + label {
+    &::before {
       content: '';
       display: block;
       position: absolute;
       border-radius: 50%;
-      top: 4px;
-      left: 4px;
-      width: 10px;
-      height: 10px;
+      top: 0px;
+      left: 0px;
+      width: 24px;
+      height: 24px;
+      background-color: ${colors.blue};
+      border: 1px solid ${colors.blue};
+    }
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      border-radius: 50%;
+      top: 8px;
+      left: 8px;
+      width: 8px;
+      height: 8px;
       background-color: ${colors.white};
       border: 1px solid ${colors.blue};
     }
   }
 
   &:focus {
-    & + span {
-      vertical-align: middle;
-      display: inline-block;
-      border: 1px solid ${colors.gray};
-      box-sizing: border-box;
-      background-color: ${colors.white};
-      top: 0px;
-      left: 0px;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-
-      border: 1px solid ${colors.blue};
-      box-shadow: 0 0 6px ${colors.blue}, 0 0 8px ${colors.blue};
-    }
-
-    &:checked + span {
-      position: relative;
-      background-color: ${colors.blue};
-      border: 2px solid ${colors.blue};
-
-      &:after {
+    & + label {
+      &::before {
         content: '';
         display: block;
         position: absolute;
         border-radius: 50%;
-        top: 4px;
-        left: 4px;
-        width: 10px;
-        height: 10px;
-        background-color: ${colors.white};
+        top: 0px;
+        left: 0px;
+        width: 24px;
+        height: 24px;
         border: 1px solid ${colors.blue};
+        box-shadow: 0 0 6px ${colors.blue}, 0 0 8px ${colors.blue};
       }
     }
   }
-`;
-
-const Label = styled.span`
-  position: relative;
-  vertical-align: middle;
-  margin-left: 8px;
 `;
 
 type Props = {
@@ -117,8 +109,7 @@ const RadioButton: React.FC<Props> = ({
         onClick={() => onClick(value)}
         defaultChecked={checked}
       />
-      <span />
-      <Label>{label}</Label>
+      <label htmlFor={`radio-${name}-${value}`}>{label}</label>
     </Container>
   );
 };
