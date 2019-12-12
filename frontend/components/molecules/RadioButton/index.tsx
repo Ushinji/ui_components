@@ -16,7 +16,7 @@ const Input = styled.input`
   appearance: none;
   position: absolute;
 
-  + label {
+  + span {
     display: block;
     position: relative;
     line-height: 28px;
@@ -38,7 +38,7 @@ const Input = styled.input`
     }
   }
 
-  &:checked + label {
+  &:checked + span {
     &::before {
       content: '';
       display: block;
@@ -109,7 +109,7 @@ const RadioButton: React.FC<Props> = ({
         onClick={() => onClick(value)}
         defaultChecked={checked}
       />
-      <label htmlFor={`radio-${name}-${value}`}>{label}</label>
+      <span>{label}</span>
     </Container>
   );
 };
