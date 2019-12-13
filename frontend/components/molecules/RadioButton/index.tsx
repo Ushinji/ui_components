@@ -67,7 +67,7 @@ const Input = styled.input`
   }
 
   &:focus {
-    & + label {
+    & + span {
       &::before {
         content: '';
         display: block;
