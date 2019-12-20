@@ -25,6 +25,7 @@ const QittaItemListPage: React.FC = () => {
   const { qittaItemList } = useQittaItemList();
   return (
     <HeaderTemplate>
+      <h1>Qitta記事一覧</h1>
       <QittaItemList qittaItemList={qittaItemList} />
     </HeaderTemplate>
   );
