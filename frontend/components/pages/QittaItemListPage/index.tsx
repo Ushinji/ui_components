@@ -2,6 +2,7 @@ import * as React from 'react';
 import HeaderTemplate from '@frontend/components/templates/HeaderTemplate';
 import { getQittaItems } from '@frontend/queries/qittaQuery';
 import { QittaItem } from '@server/apiClient/qittaClient';
+import QittaItemList from '@frontend/components/organisms/QittaItemList';
 
 const { useState } = React;
 
@@ -24,12 +25,7 @@ const QittaItemListPage: React.FC = () => {
   const { qittaItemList } = useQittaItemList();
   return (
     <HeaderTemplate>
-      <ul>
-        {qittaItemList.map((item, idx) => {
-          const key = `qitta-item-${idx}`;
-          return <li key={key}>{item.title}</li>;
-        })}
-      </ul>
+      <QittaItemList qittaItemList={qittaItemList} />
     </HeaderTemplate>
   );
 };
