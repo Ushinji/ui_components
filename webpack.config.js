@@ -14,6 +14,7 @@ module.exports = {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
     alias: {
       '@frontend': path.resolve(__dirname, 'frontend'),
+      '@server': path.resolve(__dirname, 'server'),
     },
   },
   module: {
