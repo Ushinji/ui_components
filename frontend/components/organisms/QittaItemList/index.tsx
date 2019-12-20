@@ -6,6 +6,10 @@ type Props = {
 };
 
 const QittaItemList: React.FC<Props> = ({ qittaItemList }) => {
+  if (qittaItemList.length === 0) {
+    return <div>現在、表示できる記事はありません。</div>;
+  }
+
   return (
     <ul>
       {qittaItemList.map((item, idx) => {
