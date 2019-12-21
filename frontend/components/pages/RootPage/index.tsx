@@ -9,6 +9,9 @@ const RootPage: React.FC = () => {
         <li>
           <Link to="/qitta">Qitta記事一覧ページ</Link>
         </li>
+        <li>
+          <Link to="signup">新規登録画面</Link>
+        </li>
       </ul>
     </HeaderTemplate>
   );

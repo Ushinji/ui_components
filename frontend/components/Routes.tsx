@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import RootPage from '@frontend/components/pages/RootPage';
 import QittaItemListPage from '@frontend/components/pages/QittaItemListPage';
+import SinupPage from '@frontend/components/pages/SinupPage';
 
 type State = {
   hasError: boolean;
@@ -28,6 +29,7 @@ class Routes extends React.Component<{}, State> {
       <Switch>
         <Route exact path="/" component={RootPage} />
         <Route exact path="/qitta" component={QittaItemListPage} />
+        <Route exact path="/signup" component={SinupPage} />
       </Switch>
     );
   }
