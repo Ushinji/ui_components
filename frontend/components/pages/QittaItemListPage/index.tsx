@@ -3,6 +3,7 @@ import HeaderTemplate from '@frontend/components/templates/HeaderTemplate';
 import { getQittaItems } from '@frontend/queries/qittaQuery';
 import { QittaItem } from '@server/apiClient/qittaClient';
 import QittaItemList from '@frontend/components/organisms/QittaItemList';
+import Loading from '@frontend/components/atoms/Loading';
 
 const { useState } = React;
 
@@ -49,7 +50,7 @@ const QittaItemListPage: React.FC = () => {
     return (
       <HeaderTemplate>
         <h1>Qitta記事一覧</h1>
-        <div>Now Loading...</div>
+        <Loading />
       </HeaderTemplate>
     );
   }
