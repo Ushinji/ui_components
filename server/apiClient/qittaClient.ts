@@ -5,6 +5,9 @@ export type QittaItem = {
   title: string;
 };
 
+// READ: https://qiita.com/api/v2/docs
+const token = process.env.QittaAccessToken;
+
 class QittaClient {
   public axios: AxiosInstance;
 
@@ -13,6 +16,7 @@ class QittaClient {
       baseURL: 'https://qiita.com/api/v2',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
       },
     });
   }

@@ -6,7 +6,7 @@ const router = Router();
 router.use('/items', async (_, res: Response) => {
   const client = new QittaClient();
   const items = await client.getItems();
-  res.json({ items });
+  res.json(items);
 });
 
 export default router;

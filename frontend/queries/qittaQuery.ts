@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { QittaItem } from '@server/apiClient/qittaClient';
 
 export const getQittaItems = async () => {
   const axiosClient = axios.create({
@@ -9,5 +8,5 @@ export const getQittaItems = async () => {
     },
   });
   const res = await axiosClient.get('/api/qitta/items');
-  return res.data.items as QittaItem[];
+  return res;
 };
