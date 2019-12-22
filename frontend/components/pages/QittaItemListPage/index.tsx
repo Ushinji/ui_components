@@ -3,20 +3,19 @@ import HeaderTemplate from '@frontend/components/templates/HeaderTemplate';
 import { getQittaItems } from '@frontend/queries/qittaQuery';
 import { QittaItem } from '@server/apiClient/qittaClient';
 import QittaItemList from '@frontend/components/organisms/QittaItemList';
-import Loading from '@frontend/components/atoms/Loading';
 
 const { useState } = React;
 
 type ResponseQittaItemList = {
-  loading: boolean;
-  error: boolean;
+  isLoading: boolean;
+  isError: boolean;
   items?: QittaItem[];
 };
 
 const useQittaItemList = () => {
   const [state, setState] = useState<ResponseQittaItemList>({
-    loading: true,
-    error: false,
+    isLoading: true,
+    isError: false,
     items: undefined,
   });
 
@@ -24,14 +23,14 @@ const useQittaItemList = () => {
     const res = await getQittaItems();
     if (res.status >= 400) {
       setState({
-        loading: false,
-        error: true,
+        isLoading: false,
+        isError: true,
       });
     }
     const items = res.data as QittaItem[];
     setState({
-      loading: false,
-      error: false,
+      isLoading: false,
+      isError: false,
       items,
     });
   }, []);
@@ -44,30 +43,16 @@ const useQittaItemList = () => {
 };
 
 const QittaItemListPage: React.FC = () => {
-  const { loading, error, items } = useQittaItemList();
-
-  if (loading) {
-    return (
-      <HeaderTemplate>
-        <h1>Qitta記事一覧</h1>
-        <Loading />
-      </HeaderTemplate>
-    );
-  }
-
-  if (error || !items) {
-    return (
-      <HeaderTemplate>
-        <h1>Qitta記事一覧</h1>
-        <div>サーバー接続に失敗しました。</div>
-      </HeaderTemplate>
-    );
-  }
+  const { isLoading, isError, items } = useQittaItemList();
 
   return (
     <HeaderTemplate>
       <h1>Qitta記事一覧</h1>
-      <QittaItemList qittaItemList={items} />
+      <QittaItemList
+        isLoading={isLoading}
+        isError={isError || !items}
+        qittaItemList={items || []}
+      />
     </HeaderTemplate>
   );
 };

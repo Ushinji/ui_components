@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { QittaItem } from '@server/apiClient/qittaClient';
 import colors from '@frontend/components/styles/colors';
+import Loading from '@frontend/components/atoms/Loading';
 
 const Container = styled.ul`
   list-style: none;
@@ -34,12 +35,30 @@ const AncharLink = styled.a`
 `;
 
 type Props = {
+  isLoading: boolean;
+  isError: boolean;
   qittaItemList: QittaItem[];
 };
 
-const QittaItemList: React.FC<Props> = ({ qittaItemList }) => {
+const QittaItemList: React.FC<Props> = ({
+  isLoading,
+  isError,
+  qittaItemList,
+}) => {
+  if (isLoading) {
+    return (
+      <Container>
+        <Loading />
+      </Container>
+    );
+  }
+
+  if (isError) {
+    return <Container>サーバー接続に失敗しました。</Container>;
+  }
+
   if (qittaItemList.length === 0) {
-    return <div>現在、表示できる記事はありません。</div>;
+    return <Container>現在、表示できる記事はありません。</Container>;
   }
 
   return (
