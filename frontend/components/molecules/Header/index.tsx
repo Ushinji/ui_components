@@ -10,8 +10,11 @@ const Container = styled.div`
 `;
 
 const Content = styled.div`
-  padding: 8px 24px;
+  width: 940px;
+  margin: 0 auto;
+  padding: 8px 0;
   line-height: 24px;
+  font-weight: bold;
 `;
 
 const Header: React.FC = () => {

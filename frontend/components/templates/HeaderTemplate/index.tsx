@@ -4,7 +4,7 @@ import Header from '@frontend/components/molecules/Header';
 
 const Container = styled.div``;
 const Body = styled.div`
-  width: 800px;
+  width: 940px;
   margin: 0 auto;
 `;
 
