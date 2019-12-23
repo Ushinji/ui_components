@@ -4,7 +4,6 @@ import colors from '@frontend/components/styles/colors';
 
 const Container = styled.div`
   width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
