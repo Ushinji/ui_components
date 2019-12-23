@@ -16,9 +16,23 @@ const Item = styled.li`
   border-radius: 4px;
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.15);
   margin-bottom: 16px;
+  font-size: 14px;
 
   &:hover {
     background-color: #f9f9f9;
+  }
+`;
+
+const AncharLink = styled.a`
+  width: 100%;
+  padding: 8px;
+  display: block;
+  color: black;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+    text-decoration-color: black;
   }
 `;
 
@@ -67,9 +81,9 @@ const QittaTagList: React.FC<Props> = ({
         const key = `qitta-item-${idx}`;
         return (
           <Item key={key}>
-            <div>{tag.id}</div>
-            <div>{tag.items_count}</div>
-            <div>{tag.followers_count}</div>
+            <AncharLink href={`https://qiita.com/tags/${tag.id}`}>
+              {`${tag.id}(${tag.items_count})`}
+            </AncharLink>
           </Item>
         );
       })}
