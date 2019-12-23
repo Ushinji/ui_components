@@ -1,14 +1,14 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { QittaItem } from '@server/apiClient/qittaClient';
+import { QittaTag } from '@server/apiClient/qittaClient';
 import colors from '@frontend/components/styles/colors';
 import Loading from '@frontend/components/atoms/Loading';
 
 const Container = styled.ul`
+  width: 200px;
   list-style: none;
-  margin: 0 32px 0 0;
+  margin: 0;
   padding: 0;
-  width: 600px;
 `;
 
 const Item = styled.li`
@@ -22,34 +22,21 @@ const Item = styled.li`
   }
 `;
 
-const AncharLink = styled.a`
-  width: 100%;
-  padding: 32px 16px;
-  display: block;
-  color: black;
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
-    text-decoration-color: black;
-  }
-`;
-
 type Props = {
   isLoading: boolean;
   isError: boolean;
-  qittaItemList: QittaItem[];
+  qittaTagList: QittaTag[];
 };
 
-const QittaItemList: React.FC<Props> = ({
+const QittaTagList: React.FC<Props> = ({
   isLoading,
   isError,
-  qittaItemList,
+  qittaTagList,
 }) => {
   if (isLoading) {
     return (
       <Container>
-        <h2>記事一覧</h2>
+        <h2>タグ一覧</h2>
         <Loading />
       </Container>
     );
@@ -58,29 +45,31 @@ const QittaItemList: React.FC<Props> = ({
   if (isError) {
     return (
       <Container>
-        <h2>記事一覧</h2>
+        <h2>タグ一覧</h2>
         <div>サーバー接続に失敗しました。</div>
       </Container>
     );
   }
 
-  if (qittaItemList.length === 0) {
+  if (qittaTagList.length === 0) {
     return (
       <Container>
-        <h2>記事一覧</h2>
-        <div>現在、表示できる記事はありません。</div>
+        <h2>タグ一覧</h2>
+        <div>現在、表示できるタグはありません。</div>
       </Container>
     );
   }
 
   return (
     <Container>
-      <h2>記事一覧</h2>
-      {qittaItemList.map((item, idx) => {
+      <h2>タグ一覧</h2>
+      {qittaTagList.map((tag, idx) => {
         const key = `qitta-item-${idx}`;
         return (
           <Item key={key}>
-            <AncharLink href={item.url}>{item.title}</AncharLink>
+            <div>{tag.id}</div>
+            <div>{tag.items_count}</div>
+            <div>{tag.followers_count}</div>
           </Item>
         );
       })}
@@ -88,4 +77,4 @@ const QittaItemList: React.FC<Props> = ({
   );
 };
 
-export default QittaItemList;
+export default QittaTagList;
