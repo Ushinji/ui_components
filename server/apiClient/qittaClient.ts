@@ -29,7 +29,7 @@ class QittaClient {
   }
 
   public getItems() {
-    return this.axios.get('items').then(res => {
+    return this.axios.get('items?per_page=10').then(res => {
       return res.data as QittaItem[];
     });
   }
