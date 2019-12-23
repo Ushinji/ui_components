@@ -9,4 +9,10 @@ router.use('/items', async (_, res: Response) => {
   res.json(items);
 });
 
+router.use('/tags', async (_, res: Response) => {
+  const client = new QittaClient();
+  const tags = await client.getTags();
+  res.json(tags);
+});
+
 export default router;
