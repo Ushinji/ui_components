@@ -4,6 +4,8 @@ import { QittaItem } from '@server/apiClient/qittaClient';
 import colors from '@frontend/components/styles/colors';
 import Loading from '@frontend/components/atoms/Loading';
 
+const { useState, useCallback } = React;
+
 const Container = styled.ul`
   list-style: none;
   margin: 0 32px 0 0;
@@ -35,6 +37,17 @@ const AncharLink = styled.a`
   }
 `;
 
+const useQittaItemList = (onFetchNext: () => Promise<void>) => {
+  const [nextLoading, setNextLoading] = useState(false);
+  const onNextPageClick = useCallback(async () => {
+    setNextLoading(true);
+    await onFetchNext();
+    setNextLoading(false);
+  }, [onFetchNext]);
+
+  return { onNextPageClick, nextLoading };
+};
+
 type Props = {
   isLoading: boolean;
   isError: boolean;
@@ -48,6 +61,8 @@ const QittaItemList: React.FC<Props> = ({
   qittaItemList,
   onFetchNext,
 }) => {
+  const { onNextPageClick, nextLoading } = useQittaItemList(onFetchNext);
+
   if (isLoading) {
     return (
       <Container>
@@ -86,9 +101,13 @@ const QittaItemList: React.FC<Props> = ({
           </Item>
         );
       })}
-      <button type="button" onClick={onFetchNext}>
-        次へ
-      </button>
+      {nextLoading ? (
+        <Loading />
+      ) : (
+        <button type="button" onClick={() => onNextPageClick()}>
+          次へ
+        </button>
+      )}
     </Container>
   );
 };
