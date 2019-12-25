@@ -4,40 +4,62 @@ import { QittaItem, QittaTag } from '@server/apiClient/qittaClient';
 
 const { useState, useCallback, useEffect } = React;
 
-type ResponseQittaItemList = {
+type QittaItemListState = {
   isLoading: boolean;
   isError: boolean;
-  items?: QittaItem[];
+  items: QittaItem[];
+  page: number;
 };
 
 export const useQittaItemList = () => {
-  const [state, setState] = useState<ResponseQittaItemList>({
+  const [state, setState] = useState<QittaItemListState>({
     isLoading: true,
     isError: false,
-    items: undefined,
+    items: [],
+    page: 1,
   });
 
-  const fetchData = useCallback(async () => {
+  const fetchItems = useCallback(async () => {
     const res = await getQittaItems();
     if (res.status >= 400) {
-      setState({
-        isLoading: false,
-        isError: true,
+      setState(prevState => {
+        return { ...prevState, isLoading: false, isError: true };
       });
     }
     const items = res.data as QittaItem[];
-    setState({
-      isLoading: false,
-      isError: false,
-      items,
+    setState(prevState => {
+      return {
+        ...prevState,
+        isLoading: false,
+        isError: false,
+        items,
+      };
     });
   }, []);
 
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+  const fetchNextItems = useCallback(async () => {
+    const res = await getQittaItems(state.page + 1);
+    if (res.status >= 400) {
+      setState(prevState => {
+        return { ...prevState, isLoading: false, isError: true };
+      });
+    }
+    const items = res.data as QittaItem[];
+    setState(prevState => {
+      return {
+        isLoading: false,
+        isError: false,
+        page: state.page + 1,
+        items: prevState.items.concat(items),
+      };
+    });
+  }, [state.page]);
 
-  return { ...state };
+  useEffect(() => {
+    fetchItems();
+  }, [fetchItems]);
+
+  return { fetchNextItems, ...state };
 };
 
 type ResponseQittaTagList = {

@@ -39,12 +39,14 @@ type Props = {
   isLoading: boolean;
   isError: boolean;
   qittaItemList: QittaItem[];
+  onFetchNext: () => Promise<void>;
 };
 
 const QittaItemList: React.FC<Props> = ({
   isLoading,
   isError,
   qittaItemList,
+  onFetchNext,
 }) => {
   if (isLoading) {
     return (
@@ -84,6 +86,9 @@ const QittaItemList: React.FC<Props> = ({
           </Item>
         );
       })}
+      <button type="button" onClick={onFetchNext}>
+        次へ
+      </button>
     </Container>
   );
 };

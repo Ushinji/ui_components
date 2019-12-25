@@ -5,7 +5,9 @@ import QittaItemList from '@frontend/components/organisms/QittaItemList';
 import QittaTagList from '@frontend/components/organisms/QittaTagList';
 import { useQittaItemList, useQittaTagList } from './hooks';
 
-const Container = styled.div``;
+const Container = styled.div`
+  margin-bottom: 32px;
+`;
 
 const Body = styled.div`
   display: flex;
@@ -16,6 +18,7 @@ const QittaItemListPage: React.FC = () => {
     isLoading: isItemsLoading,
     isError: isItemsError,
     items,
+    fetchNextItems,
   } = useQittaItemList();
   const {
     isLoading: isTagsLoading,
@@ -32,6 +35,7 @@ const QittaItemListPage: React.FC = () => {
             isLoading={isItemsLoading}
             isError={isItemsError || !items}
             qittaItemList={items || []}
+            onFetchNext={fetchNextItems}
           />
           <QittaTagList
             isLoading={isTagsLoading}

@@ -1,11 +1,12 @@
-import { Router, Response } from 'express';
+import { Router, Response, Request } from 'express';
 import QittaClient from '../../apiClient/qittaClient';
 
 const router = Router();
 
-router.use('/items', async (_, res: Response) => {
+router.use('/items', async (req: Request, res: Response) => {
+  const page = req.query.page;
   const client = new QittaClient();
-  const items = await client.getItems();
+  const items = await client.getItems(page);
   res.json(items);
 });
 

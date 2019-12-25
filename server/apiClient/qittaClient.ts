@@ -28,8 +28,8 @@ class QittaClient {
     });
   }
 
-  public getItems() {
-    return this.axios.get('items?per_page=10').then(res => {
+  public getItems(page = 1) {
+    return this.axios.get(`items?per_page=10&page=${page}`).then(res => {
       return res.data as QittaItem[];
     });
   }
