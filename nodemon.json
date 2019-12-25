@@ -1,6 +1,6 @@
 {
     "execMap": {
-      "ts": "ts-node"
+      "ts": "ts-node  --files"
     },
     "ignore": [".git", "node_modules"],
     "watch": ["server"],
