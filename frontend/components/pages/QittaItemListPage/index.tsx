@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import HeaderTemplate from '@frontend/components/templates/HeaderTemplate';
 import QittaItemList from '@frontend/components/organisms/QittaItemList';
 import QittaTagList from '@frontend/components/organisms/QittaTagList';
-import { useQittaItemList, useQittaTagList } from './hooks';
+import { useQittaItems, useQittaTags } from './hooks';
 
 const Container = styled.div`
   margin-bottom: 32px;
@@ -19,12 +19,12 @@ const QittaItemListPage: React.FC = () => {
     isError: isItemsError,
     items,
     fetchNextItems,
-  } = useQittaItemList();
+  } = useQittaItems();
   const {
     isLoading: isTagsLoading,
     isError: isTagsError,
     tags,
-  } = useQittaTagList();
+  } = useQittaTags();
 
   return (
     <HeaderTemplate>

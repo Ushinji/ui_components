@@ -11,7 +11,7 @@ type QittaItemListState = {
   page: number;
 };
 
-export const useQittaItemList = () => {
+export const useQittaItems = () => {
   const [state, setState] = useState<QittaItemListState>({
     isLoading: true,
     isError: false,
@@ -62,20 +62,20 @@ export const useQittaItemList = () => {
   return { fetchNextItems, ...state };
 };
 
-type ResponseQittaTagList = {
+type QittaTagListState = {
   isLoading: boolean;
   isError: boolean;
   tags?: QittaTag[];
 };
 
-export const useQittaTagList = () => {
-  const [state, setState] = useState<ResponseQittaTagList>({
+export const useQittaTags = () => {
+  const [state, setState] = useState<QittaTagListState>({
     isLoading: true,
     isError: false,
     tags: undefined,
   });
 
-  const fetchData = React.useCallback(async () => {
+  const fetchData = useCallback(async () => {
     const res = await getQittaTags();
     if (res.status >= 400) {
       setState({
@@ -91,7 +91,7 @@ export const useQittaTagList = () => {
     });
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetchData();
   }, [fetchData]);
 
